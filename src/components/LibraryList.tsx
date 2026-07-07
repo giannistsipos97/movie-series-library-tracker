@@ -1,5 +1,5 @@
-import { LibraryItem } from "./LibraryItem";
-import type { LibraryItem as LibraryItemType } from "../types/library";
+import { LibraryItem } from './LibraryItem';
+import type { LibraryItem as LibraryItemType } from '../types/library';
 
 type LibraryListProps = {
   items: LibraryItemType[];

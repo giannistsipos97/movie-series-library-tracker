@@ -3,14 +3,17 @@ import { libraryItems } from './data/libraryItems';
 import { LibraryList } from './components/LibraryList';
 import { StatsSummary } from './components/StatsSummary';
 import { LibraryToolbar } from './components/LibraryToolbar';
+import { useState } from 'react';
 
 export function App() {
-  const completedCount = libraryItems.filter(
-    (item) => item.status === 'Completed'
-  ).length;
-  const watchlistCount = libraryItems.filter(
-    (item) => item.status === 'To watch'
-  ).length;
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const completedCount = libraryItems.filter((item) => item.status === 'Completed').length;
+  const watchlistCount = libraryItems.filter((item) => item.status === 'To watch').length;
+
+  const filteredItems = libraryItems.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <main className="app-shell">
@@ -19,8 +22,8 @@ export function App() {
           <p className="eyebrow">Library Tracker MVP</p>
           <h1>Movie & Series Library</h1>
           <p className="hero-copy">
-            Track what you want to watch, what you are currently watching, and
-            what deserves a rewatch.
+            Track what you want to watch, what you are currently watching, and what deserves a
+            rewatch.
           </p>
         </div>
         <button className="primary-action" type="button">
@@ -36,8 +39,8 @@ export function App() {
       />
 
       <section className="library-panel">
-        <LibraryToolbar />
-        <LibraryList items={libraryItems} />
+        <LibraryToolbar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
+        <LibraryList items={filteredItems} />
       </section>
     </main>
   );
