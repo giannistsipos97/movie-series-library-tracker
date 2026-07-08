@@ -5,3 +5,5 @@ export type LibraryItem = {
   status: 'To watch' | 'Watching' | 'Completed';
   rating: number;
 };
+
+export type LibraryTypeFilter = 'All' | 'Movie' | 'Series';

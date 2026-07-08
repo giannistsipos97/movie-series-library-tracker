@@ -4,16 +4,22 @@ import { LibraryList } from './components/LibraryList';
 import { StatsSummary } from './components/StatsSummary';
 import { LibraryToolbar } from './components/LibraryToolbar';
 import { useState } from 'react';
+import { LibraryTypeFilter } from './types/library';
 
 export function App() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [typeFilter, setTypeFilter] = useState<LibraryTypeFilter>('All');
 
   const completedCount = libraryItems.filter((item) => item.status === 'Completed').length;
   const watchlistCount = libraryItems.filter((item) => item.status === 'To watch').length;
 
-  const filteredItems = libraryItems.filter((item) =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredItems = libraryItems.filter((item) => {
+    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesType = typeFilter === 'All' || item.type === typeFilter;
+
+    return matchesSearch && matchesType;
+  });
 
   return (
     <main className="app-shell">
@@ -39,7 +45,12 @@ export function App() {
       />
 
       <section className="library-panel">
-        <LibraryToolbar searchQuery={searchQuery} onSearchQueryChange={setSearchQuery} />
+        <LibraryToolbar
+          searchQuery={searchQuery}
+          onSearchQueryChange={setSearchQuery}
+          selectedTypeFilter={typeFilter}
+          onTypeFilterChange={setTypeFilter}
+        />
         <LibraryList items={filteredItems} />
       </section>
     </main>
