@@ -4,16 +4,23 @@ import { LibraryList } from './components/LibraryList';
 import { StatsSummary } from './components/StatsSummary';
 import { LibraryToolbar } from './components/LibraryToolbar';
 import { useState } from 'react';
-import { LibraryTypeFilter } from './types/library';
+import { LibraryTypeFilter, LibraryStatus } from './types/library';
 
 export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<LibraryTypeFilter>('All');
+  const [items, setItems] = useState(libraryItems);
 
-  const completedCount = libraryItems.filter((item) => item.status === 'Completed').length;
-  const watchlistCount = libraryItems.filter((item) => item.status === 'To watch').length;
+  const completedCount = items.filter((item) => item.status === 'Completed').length;
+  const watchlistCount = items.filter((item) => item.status === 'To watch').length;
 
-  const filteredItems = libraryItems.filter((item) => {
+  const handleStatusChange = (itemId: number, status: LibraryStatus) => {
+    setItems((currentItems) =>
+      currentItems.map((item) => (item.id === itemId ? { ...item, status } : item))
+    );
+  };
+
+  const filteredItems = items.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesType = typeFilter === 'All' || item.type === typeFilter;
@@ -39,7 +46,7 @@ export function App() {
       </section>
 
       <StatsSummary
-        totalCount={libraryItems.length}
+        totalCount={items.length}
         completedCount={completedCount}
         watchlistCount={watchlistCount}
       />
@@ -51,7 +58,7 @@ export function App() {
           selectedTypeFilter={typeFilter}
           onTypeFilterChange={setTypeFilter}
         />
-        <LibraryList items={filteredItems} />
+        <LibraryList items={filteredItems} onStatusChange={handleStatusChange} />
       </section>
     </main>
   );
