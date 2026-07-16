@@ -307,4 +307,29 @@ h1 {
   .segmented-control button {
     flex: 1;
   }
+
+  .library-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+    align-items: center;
+  }
+
+  .item-actions {
+    display: flex;
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .item-actions .rating {
+    flex-basis: 100%;
+  }
+
+  .item-actions button {
+    margin: 0;
+  }
+
+  .favorite-filter {
+    margin-left: 0;
+  }
 }
