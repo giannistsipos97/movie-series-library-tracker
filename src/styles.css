@@ -235,6 +235,10 @@ h1 {
   color: #536078;
   background: #ffffff;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .item-actions button.active {

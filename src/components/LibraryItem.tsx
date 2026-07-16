@@ -1,4 +1,4 @@
-import { Film, Tv, Heart } from 'lucide-react';
+import { Film, Tv, Play, Heart, BookmarkPlus, CircleCheck } from 'lucide-react';
 import type { LibraryItem as LibraryItemType, LibraryStatus } from '../types/library';
 
 //τα props ειναι τα αντιστοιχα @Input στην angular, ειναι τα δεδομενα που περναμε απο το parent component στο child component.
@@ -28,6 +28,7 @@ export function LibraryItem({ item, onStatusChange, onFavoriteToggle }: LibraryI
           className={item.status === 'To watch' ? 'active' : ''}
           onClick={() => onStatusChange(item.id, 'To watch')}
         >
+          <BookmarkPlus size={16} aria-hidden="true" />
           To watch
         </button>
         <button
@@ -35,6 +36,7 @@ export function LibraryItem({ item, onStatusChange, onFavoriteToggle }: LibraryI
           className={item.status === 'Watching' ? 'active' : ''}
           onClick={() => onStatusChange(item.id, 'Watching')}
         >
+          <Play size={16} aria-hidden="true" />
           Watching
         </button>
         <button
@@ -42,6 +44,7 @@ export function LibraryItem({ item, onStatusChange, onFavoriteToggle }: LibraryI
           className={item.status === 'Completed' ? 'active' : ''}
           onClick={() => onStatusChange(item.id, 'Completed')}
         >
+          <CircleCheck size={16} aria-hidden="true" />
           Completed
         </button>
         <button
