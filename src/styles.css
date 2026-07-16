@@ -259,6 +259,27 @@ h1 {
   background: #fff1f3;
 }
 
+.favorite-filter {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid #d9deea;
+  border-radius: 6px;
+  color: #536078;
+  background: #ffffff;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+.favorite-filter.active {
+  border-color: #f0a8b2;
+  color: #d92d4b;
+  background: #fff1f3;
+}
+
 @media (max-width: 760px) {
   .app-shell {
     width: min(100% - 24px, 1120px);

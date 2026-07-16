@@ -10,6 +10,7 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<LibraryTypeFilter>('All');
   const [items, setItems] = useState(libraryItems);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
 
   const completedCount = items.filter((item) => item.status === 'Completed').length;
   const watchlistCount = items.filter((item) => item.status === 'To watch').length;
@@ -31,9 +32,11 @@ export function App() {
   const filteredItems = items.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
 
+    const matchesFavorite = !showFavoritesOnly || item.isFavorite;
+
     const matchesType = typeFilter === 'All' || item.type === typeFilter;
 
-    return matchesSearch && matchesType;
+    return matchesSearch && matchesType && matchesFavorite;
   });
 
   return (
@@ -65,6 +68,8 @@ export function App() {
           onSearchQueryChange={setSearchQuery}
           selectedTypeFilter={typeFilter}
           onTypeFilterChange={setTypeFilter}
+          showFavoritesOnly={showFavoritesOnly}
+          onShowFavoritesOnlyChange={setShowFavoritesOnly}
         />
         <LibraryList
           items={filteredItems}

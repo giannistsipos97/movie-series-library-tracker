@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Heart, Search } from 'lucide-react';
 import { LibraryTypeFilter } from '../types/library';
 
 type LibraryToolbarProps = {
@@ -6,6 +6,8 @@ type LibraryToolbarProps = {
   onSearchQueryChange: (value: string) => void; //@Output
   selectedTypeFilter: LibraryTypeFilter;
   onTypeFilterChange: (filter: LibraryTypeFilter) => void;
+  showFavoritesOnly: boolean;
+  onShowFavoritesOnlyChange: (value: boolean) => void;
 };
 
 export function LibraryToolbar({
@@ -13,6 +15,8 @@ export function LibraryToolbar({
   onSearchQueryChange,
   selectedTypeFilter,
   onTypeFilterChange,
+  showFavoritesOnly,
+  onShowFavoritesOnlyChange,
 }: LibraryToolbarProps) {
   return (
     <div className="toolbar">
@@ -26,6 +30,15 @@ export function LibraryToolbar({
           onChange={(event) => onSearchQueryChange(event.target.value)} //επιστρεφει το αποτελεσμα δηλαδη το event πισω στον πατερα. Ειναι σαν να εχουμε EventEmitter
         />
       </div>
+      <button
+        type="button"
+        className={`favorite-filter ${showFavoritesOnly ? 'active' : ''}`}
+        onClick={() => onShowFavoritesOnlyChange(!showFavoritesOnly)}
+        aria-pressed={showFavoritesOnly}
+      >
+        <Heart size={16} fill={showFavoritesOnly ? 'currentColor' : 'none'} aria-hidden="true" />
+        Favorites
+      </button>
       <div className="segmented-control" aria-label="Filter library">
         <button
           type="button"
