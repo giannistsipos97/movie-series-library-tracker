@@ -20,6 +20,14 @@ export function App() {
     );
   };
 
+  const handleFavoriteToggle = (itemId: number) => {
+    setItems((currentItems) =>
+      currentItems.map((item) =>
+        item.id === itemId ? { ...item, isFavorite: !item.isFavorite } : item
+      )
+    );
+  };
+
   const filteredItems = items.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -58,7 +66,11 @@ export function App() {
           selectedTypeFilter={typeFilter}
           onTypeFilterChange={setTypeFilter}
         />
-        <LibraryList items={filteredItems} onStatusChange={handleStatusChange} />
+        <LibraryList
+          items={filteredItems}
+          onStatusChange={handleStatusChange}
+          onFavoriteToggle={handleFavoriteToggle}
+        />
       </section>
     </main>
   );

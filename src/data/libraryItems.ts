@@ -7,6 +7,7 @@ export const libraryItems: LibraryItem[] = [
     type: 'Movie',
     status: 'Completed',
     rating: 9,
+    isFavorite: false,
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const libraryItems: LibraryItem[] = [
     type: 'Series',
     status: 'Watching',
     rating: 8,
+    isFavorite: false,
   },
   {
     id: 3,
@@ -21,5 +23,6 @@ export const libraryItems: LibraryItem[] = [
     type: 'Series',
     status: 'To watch',
     rating: 0,
+    isFavorite: true,
   },
 ];

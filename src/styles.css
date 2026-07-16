@@ -226,6 +226,35 @@ h1 {
   white-space: nowrap;
 }
 
+.item-actions button {
+  min-height: 34px;
+  padding: 0 10px;
+  margin: 0 4px;
+  border: 1px solid #d9deea;
+  border-radius: 6px;
+  color: #536078;
+  background: #ffffff;
+  font-weight: 700;
+}
+
+.item-actions button.active {
+  border-color: #275efe;
+  color: #ffffff;
+  background: #275efe;
+}
+
+.item-actions .favorite-button {
+  width: 34px;
+  padding: 0;
+  color: #6c7790;
+}
+
+.item-actions .favorite-button.is-favorite {
+  border-color: #f0a8b2;
+  color: #d92d4b;
+  background: #fff1f3;
+}
+
 @media (max-width: 760px) {
   .app-shell {
     width: min(100% - 24px, 1120px);

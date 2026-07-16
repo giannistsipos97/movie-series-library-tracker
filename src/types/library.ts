@@ -4,6 +4,7 @@ export type LibraryItem = {
   type: 'Movie' | 'Series';
   status: LibraryStatus;
   rating: number;
+  isFavorite: boolean;
 };
 
 export type LibraryTypeFilter = 'All' | 'Movie' | 'Series';
