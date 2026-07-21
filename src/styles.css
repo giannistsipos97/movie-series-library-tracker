@@ -259,6 +259,12 @@ h1 {
   background: #fff1f3;
 }
 
+.item-actions .delete-button {
+  width: 34px;
+  padding: 0;
+  color: #b42318;
+}
+
 .favorite-filter {
   display: inline-flex;
   min-height: 40px;
@@ -278,6 +284,151 @@ h1 {
   border-color: #f0a8b2;
   color: #d92d4b;
   background: #fff1f3;
+}
+
+.empty-state {
+  padding: 40px 16px;
+  color: #6c7790;
+  text-align: center;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: rgb(16 24 39 / 0.55);
+}
+
+.add-title-dialog,
+.rating-dialog {
+  width: min(440px, calc(100% - 32px));
+  padding: 24px;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.add-title-dialog h2,
+.rating-dialog h2 {
+  margin-bottom: 20px;
+}
+
+.add-title-form {
+  display: grid;
+  gap: 12px;
+}
+
+.title-field-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-field-row > label {
+  color: #172033;
+  font-weight: 700;
+}
+
+.title-field-row > input {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid #d9deea;
+  border-radius: 6px;
+  background: #fbfcff;
+  flex: 1;
+  min-width: 0;
+}
+
+.add-title-form fieldset {
+  display: flex;
+  gap: 18px;
+  margin: 4px 0 0;
+  padding: 12px;
+  border: 1px solid #d9deea;
+  border-radius: 6px;
+}
+
+.add-title-form legend {
+  padding: 0 6px;
+  color: #172033;
+  font-weight: 700;
+}
+
+.add-title-form fieldset label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #536078;
+}
+
+.add-title-form input[type='radio'] {
+  accent-color: #275efe;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.dialog-actions button {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #d9deea;
+  border-radius: 6px;
+  color: #536078;
+  background: #ffffff;
+  font-weight: 700;
+}
+
+.dialog-actions button[type='submit'],
+.dialog-actions .primary-dialog-action {
+  border-color: #275efe;
+  color: #ffffff;
+  background: #275efe;
+}
+
+.rating-value {
+  margin-bottom: 16px;
+  color: #172033;
+  font-size: 1.25rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.rating-options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.rating-options button {
+  min-height: 42px;
+  border: 1px solid #d9deea;
+  border-radius: 6px;
+  color: #536078;
+  background: #ffffff;
+  font-weight: 700;
+}
+
+.rating-options button.active {
+  border-color: #275efe;
+  color: #ffffff;
+  background: #275efe;
+}
+
+.dialog-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.item-actions .rating-button.is-rated {
+  border-color: #f2cc60;
+  color: #9a6700;
+  background: #fff8d6;
 }
 
 @media (max-width: 760px) {

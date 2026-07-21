@@ -5,12 +5,14 @@ import { StatsSummary } from './components/StatsSummary';
 import { LibraryToolbar } from './components/LibraryToolbar';
 import { useState } from 'react';
 import { LibraryTypeFilter, LibraryStatus } from './types/library';
+import { AddTitleDialog } from './components/AddTitleDialog';
 
 export function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<LibraryTypeFilter>('All');
   const [items, setItems] = useState(libraryItems);
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [isAddFormOpen, setIsAddFormOpen] = useState(false);
 
   const completedCount = items.filter((item) => item.status === 'Completed').length;
   const watchlistCount = items.filter((item) => item.status === 'To watch').length;
@@ -26,6 +28,44 @@ export function App() {
       currentItems.map((item) =>
         item.id === itemId ? { ...item, isFavorite: !item.isFavorite } : item
       )
+    );
+  };
+
+  const handleAddItem = (title: string, type: 'Movie' | 'Series') => {
+    setItems((currentItems) => [
+      ...currentItems,
+      {
+        id: Date.now(),
+        title,
+        type,
+        status: 'To watch',
+        rating: 0,
+        isFavorite: false,
+      },
+    ]);
+
+    setIsAddFormOpen(false);
+  };
+
+  const handleDeleteItem = (itemId: number) => {
+    const itemToDelete = items.find((item) => item.id === itemId);
+
+    if (!itemToDelete) {
+      return;
+    }
+
+    const shouldDelete = window.confirm(`Are you sure you want to delete "${itemToDelete.title}"?`);
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    setItems((currentItems) => currentItems.filter((item) => item.id !== itemId));
+  };
+
+  const handleRatingChange = (itemId: number, rating: number) => {
+    setItems((currentItems) =>
+      currentItems.map((item) => (item.id === itemId ? { ...item, rating } : item))
     );
   };
 
@@ -50,11 +90,19 @@ export function App() {
             rewatch.
           </p>
         </div>
-        <button className="primary-action" type="button">
+        <button
+          className="primary-action"
+          type="button"
+          onClick={() => setIsAddFormOpen(!isAddFormOpen)}
+        >
           <Plus size={18} />
-          Add title
+          {isAddFormOpen ? 'Close' : 'Add title'}
         </button>
       </section>
+
+      {isAddFormOpen && (
+        <AddTitleDialog onAdd={handleAddItem} onClose={() => setIsAddFormOpen(false)} />
+      )}
 
       <StatsSummary
         totalCount={items.length}
@@ -75,6 +123,8 @@ export function App() {
           items={filteredItems}
           onStatusChange={handleStatusChange}
           onFavoriteToggle={handleFavoriteToggle}
+          onDelete={handleDeleteItem}
+          onRatingChange={handleRatingChange}
         />
       </section>
     </main>
